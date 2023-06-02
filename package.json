@@ -1,0 +1,26 @@
+{
+  "name": "stellar-nft",
+  "version": "0.3.0",
+  "description": "",
+  "main": "lib/index.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bs58": "^4.0.1",
+    "isomorphic-fetch": "^2.2.1",
+    "json-stringify-safe": "^5.0.1",
+    "stellar-sdk": "^0.15.0",
+    "toml-j0.4": "^1.1.1",
+    "with-query": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^11.12.2",
+    "typescript": "^3.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "babel --presets env -d lib/ src/",
+    "prepublish": "npm run compile"
+  },
+  "author": "Daniel Kovach <daniel@kovach.tech>",
+  "license": "MIT"
+}
