@@ -112,8 +112,6 @@ if __name__ == "__main__" :
             action="store", default="", help="From address", metavar="STRING" )
     parser.add_option( "-T", "--to", dest="to_address", 
             action="store", default="", help="To address", metavar="STRING" )
-    parser.add_option( "-C", "--contract", dest="contract", 
-            action="store", default="", help="Contract address", metavar="STRING" )
     parser.add_option( "-k", "--keys", dest="keys", 
             action="store", default=KEYS, help="Keys file", metavar="STRING" )
     parser.add_option( "-o", "--output", dest="output", 

@@ -18,8 +18,8 @@ This repo contains the code for a soulbound token on the Stellar network.
 
 - To create the token:
 
-`> python stellar.py -c token -k keys.json -s https://horizon-testnet.stellar.org -S <symbol> -l <number of tokens> -m <metadata>`
+`> python stellar.py -c token -k keys.json -s https://horizon-testnet.stellar.org -S <symbol> -m <metadata>`
 
 - To transfer the token:
 
-`> python stellar.py -t -F <from> -T <to> -C <credentials>`
+`> python stellar.py -t -F <from> -T <to>`
