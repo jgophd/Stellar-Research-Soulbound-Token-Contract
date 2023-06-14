@@ -1,23 +1,25 @@
+# Introduction
 
+This repo contains the code for a soulbound token on the Stellar network.
 
+# Installation
 
-# Example usage
+`> pip install -r requirements.txt`
 
-```javascript
-import {NFT, networks} from 'stellar-nft';
+# Usage
 
-(async function () {
+- To create the keys:
 
-    const nft = new NFT({
-        horizon: 'https://horizon-testnet.stellar.org',
-        network: networks.testnet
-    });
+`> python stellar.py -c keys -o keys.json`
 
-    const token = nft.token('GAB35A2WLFSK64P6EWSGVFXZYU6E5K2INGTTLMDEDSIPYOH7NZVV6GIG');
-    const owner = await token.getOwner();
-    console.log(owner);
+- To register the keys:
 
-    const metadata = await token.getMetadata();
-    console.log(metadata);
-})();
-```
+`> python stellar.py -r -k keys.json -s https://horizon-testnet.stellar.org`
+
+- To create the token:
+
+`> python stellar.py -c token -k keys.json -s https://horizon-testnet.stellar.org -S <symbol> -l <number of tokens> -m <metadata>`
+
+- To transfer the token:
+
+`> python stellar.py -t -F <from> -T <to> -C <credentials>`
