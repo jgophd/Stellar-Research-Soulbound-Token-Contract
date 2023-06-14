@@ -2,16 +2,13 @@
 
 ###########################################################################
 #
-# name          : 02_fund_accounts.py
+# name          : stellar.py
 #
-# purpose       : validate accounts and fund
+# purpose       : Soubound token
 # 
-# usage         : python 02_fund_accounts.py
+# usage         : python stellar.py <args> 
 #
 # description   :
-#  stellar-sdk >= 2.0.0 required
-#  create a completely new and unique pair of keys
-#  see more about KeyPair objects: https://stellar-sdk.readthedocs.io/en/latest/api.html#keypair
 #
 ###########################################################################
 

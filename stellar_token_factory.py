@@ -1,3 +1,17 @@
+#!/usr/bin/python
+
+###########################################################################
+#
+# name          : stellar_token_factory.py
+#
+# purpose       : token factory 
+# 
+# usage         : from import stellar_token_factory import TokenFactory
+#
+# description   :
+#
+###########################################################################
+
 import io
 import json
 import time
