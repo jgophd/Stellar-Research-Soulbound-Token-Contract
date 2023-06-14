@@ -94,7 +94,7 @@ def create_token( options ) :
 
 def transfer_token( options ) :
     tf = TokenFactory( issuer_secret_key )
-    tx = tf.transfer( options.from, options.to, options.contract )
+    tx = tf.transfer( options.from_address, options.to_address, options.contract )
 
 
 if __name__ == "__main__" :
@@ -108,9 +108,9 @@ if __name__ == "__main__" :
 
     parser.add_option( "-c", "--create", dest="create", 
             action="store", default="", help="Create keys or token", metavar="BOOL" )
-    parser.add_option( "-F", "--from", dest="from", 
+    parser.add_option( "-F", "--from", dest="from_address", 
             action="store", default="", help="From address", metavar="STRING" )
-    parser.add_option( "-T", "--to", dest="to", 
+    parser.add_option( "-T", "--to", dest="to_address", 
             action="store", default="", help="To address", metavar="STRING" )
     parser.add_option( "-C", "--contract", dest="contract", 
             action="store", default="", help="Contract address", metavar="STRING" )
