@@ -29,7 +29,7 @@ Code to create metadata is in the `certificate.py` file.  The steps to create th
 
 To create the token metadata:
 
-`> python certificate.py -S <symbol> --course <course_name> --name <name> --title <certificate_title>`
+`> python certificate.py -m -S <symbol> --course <course_name> --name <name> --title <certificate_title>`
 
 **NOTE:** Token creation code will do this automatically.  It is not necessary to run the token metadata creation code in a separate step.
 
