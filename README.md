@@ -54,7 +54,7 @@ For examples with command line arguments, see below.
 
 - To create the token:
 
-`> python stellar.py -c token -k keys.json -s https://horizon-testnet.stellar.org -S <symbol> --course <course_name> --name <name> --title <certificate_title>
+`> python stellar.py -c token -k keys.json -s https://horizon-testnet.stellar.org -S <symbol> --course <course_name> --name <name> --title <certificate_title>`
 
 - To read the token metadata:
 
