@@ -1,0 +1,17 @@
+<svg class="certificate" width="$width" height="$height" viewBox="$vbx1 $vby1 $vbx2 $vby2" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+<rect class="frame" x="$fx1" y="$fy1" width="$fw1" height="$fh1" rx="$rx" fill="$color1"/>
+<rect class="frame" x="$fx2" y="$fy2" width="$fw2" height="$fh2" rx="$rx" fill="$color2" />
+
+<rect class="frame" x="$fx3" y="$fy3" width="$fw3" height="$fh3" rx="$rx" fill="$color1"/>
+<rect class="frame" x="$fx4" y="$fy4" width="$fw4" height="$fh4" rx="$rx" fill="$color2" />
+
+<circle class="dot" cx="$cx1" cy="$cy1" r="$radius" />
+<circle class="dot" cx="$cx2" cy="$cy2" r="$radius" />
+<circle class="dot" cx="$cx3" cy="$cy3" r="$radius" />
+<circle class="dot" cx="$cx4" cy="$cy4" r="$radius" />
+
+<text dominant-baseline="middle" text-anchor="middle" x="$tx1" y="$ty1">$title</text>
+<text dominant-baseline="middle" text-anchor="middle" x="$tx2" y="$ty2">$name</text>
+<text dominant-baseline="middle" text-anchor="middle" x="$tx3" y="$ty3">$course</text>
+</svg>
