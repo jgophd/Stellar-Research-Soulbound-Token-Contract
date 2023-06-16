@@ -89,6 +89,7 @@ def create_metadata( options ) :
     svg_final = IMG_PRE + svg_encoded.decode( "utf-8" )
     meta = {}
     meta[ "name" ] = "Soulbound Certficate"
+    meta[ "symbol" ] = options.symbol 
     meta[ "image" ] = svg_final
     meta[ "attributes" ] = [
             { "trait_type" : "course", "value" : options.course },
@@ -116,6 +117,8 @@ if __name__ == "__main__" :
             action="store", default="Daniel Kovach", help="Name", metavar="STRING" )
     parser.add_option( "-t", "--title", dest="title", 
             action="store", default="Certificate", help="Certificate title", metavar="STRING" )
+    parser.add_option( "-S", "--symbol", dest="symbol", 
+            action="store", default="SOUL", help="Token symbol", metavar="STRING" )
     ( options, args ) = parser.parse_args()
 
 

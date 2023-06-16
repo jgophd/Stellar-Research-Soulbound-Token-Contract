@@ -12,6 +12,7 @@
 #
 ###########################################################################
 
+import certificate
 import json
 import requests
 from stellar_sdk import Asset
@@ -25,16 +26,16 @@ from stellar_token_factory import TokenFactory
 
 DISTRIBUTOR = "distributor"
 ISSUER = "issuer"
-RECIPIENT = "recipient" 
 SERVER = "https://horizon-testnet.stellar.org" 
 KEYS = "keys.json"
 META = "default metadata"
+TX_URL = "https://horizon-testnet.stellar.org/accounts/GDEY55OSEOPOJJQV36NEFUIRUN72HTVKWGVNBP7EZC7ZARZD353GNQH6"
 
 
 def create_keys( options ) :
     print( "Creating keys" )
     keys = {}
-    for key in [ DISTRIBUTOR, ISSUER, RECIPIENT ] :
+    for key in [ DISTRIBUTOR, ISSUER ] :
         pair = Keypair.random()
 
         keys[ key ] = {}
@@ -82,19 +83,27 @@ def create_token( options ) :
     distributor_secret_key = keys[ "distributor" ][ "secret" ]
     distributor_public_key = keys[ "distributor" ][ "public" ]
 
-    # Recipient account
-    recipient_secret_key = keys[ "recipient" ][ "secret" ]
-    recipient_public_key = keys[ "recipient" ][ "public" ]
-
     tf = TokenFactory( issuer_secret_key )
 
-    tx = tf.generate_non_fungible_token( distributor_secret_key, options.symbol, metadata=options.metadata)
+    metadata = certificate.create_metadata( options )
+    tx = tf.generate_non_fungible_token( distributor_secret_key, options.symbol, metadata=metadata)
     print( json.dumps( tx, indent=2 ) )
 
 
-def transfer_token( options ) :
-    tf = TokenFactory( issuer_secret_key )
-    tx = tf.transfer( options.from_address, options.to_address, options.contract )
+def decode_metadata_from_transaction( transaction_url ) :
+    from urllib.request import urlopen
+    import base64
+
+    response = urlopen( transaction_url )
+    metadata_chunks = json.loads( response.read() )
+    metadata_string = ""
+    for i in range( len( metadata_chunks[ "data" ] ) ) :
+        key = f"metadata_{i}"
+        chunk = metadata_chunks[ "data" ][ key ]
+        metadata_string += base64.b64decode( chunk ).decode()
+
+    print( metadata_string )
+    return metadata_string
 
 
 if __name__ == "__main__" :
@@ -103,8 +112,8 @@ if __name__ == "__main__" :
     parser = optparse.OptionParser()
     parser.add_option( "-r", "--register", dest="register", 
             action="store_true", default=False, help="Register and fund keys", metavar="BOOL" )
-    parser.add_option( "-t", "--transfer", dest="transfer", 
-            action="store_true", default=False, help="transfer", metavar="BOOL" )
+    parser.add_option( "-g", "--get_metadata", dest="get_metadata", 
+            action="store_true", default=False, help="Get metadata from url", metavar="BOOL" )
 
     parser.add_option( "-c", "--create", dest="create", 
             action="store", default="", help="Create keys or token", metavar="BOOL" )
@@ -124,6 +133,16 @@ if __name__ == "__main__" :
             action="store", default="100", help="Token limit", metavar="STRING" )
     parser.add_option( "-m", "--metadata", dest="metadata", 
             action="store", default=META, help="Token metadata", metavar="STRING" )
+    parser.add_option( "-u", "--url", dest="url", 
+            action="store", default=TX_URL, help="Transaction URL", metavar="STRING" )
+
+    parser.add_option( "", "--course", dest="course", 
+            action="store", default="General Awesomeness", help="Course", metavar="STRING" )
+    parser.add_option( "", "--name", dest="name", 
+            action="store", default="Daniel Kovach", help="Name", metavar="STRING" )
+    parser.add_option( "", "--title", dest="title", 
+            action="store", default="Certificate", help="Certificate title", metavar="STRING" )
+
     ( options, args ) = parser.parse_args()
 
 
@@ -136,5 +155,5 @@ if __name__ == "__main__" :
     if options.register :
         register_keys( options )
 
-    if options.transfer :
-        transfer_token( options )
+    if options.get_metadata :
+        decode_metadata_from_transaction( options.url )

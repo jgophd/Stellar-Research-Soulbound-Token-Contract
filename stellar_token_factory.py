@@ -19,6 +19,7 @@ from stellar_base.builder import Builder
 from stellar_base.keypair import Keypair
 
 
+
 class TokenFactory(object):
 
     def __init__(self, issuer_secret, network='TESTNET'):
@@ -54,7 +55,12 @@ class TokenFactory(object):
             network=self.network
         )
         # Append relevant payment ops
-        builder.append_manage_data_op('metadata_url', metadata )
+        chunk_size = 64
+        metadata_chunks = [ metadata[ i : i + chunk_size ] for i in range( 0, len( metadata ), chunk_size ) ]
+        for i, chunk in enumerate( metadata_chunks ) :
+            key = f"metadata_{i}"
+            builder.append_manage_data_op( key, chunk )
+            
         builder.append_payment_op(
             owner_address,
             '0.0000001',
@@ -64,6 +70,3 @@ class TokenFactory(object):
         builder.append_set_options_op( master_weight=0 )
         builder.sign()
         return builder.submit()
-
-    def transfer(self, source, destination, token_address ):
-        pass
